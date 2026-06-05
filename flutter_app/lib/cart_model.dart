@@ -22,8 +22,6 @@ class MenuItem {
   });
 }
 
-// Dart doesn't allow Color literals here without a direct import — we use int.
-
 // ── Menu catalogue ────────────────────────────────────────────────────────────
 // These names MUST match what the backend returns in `detected_item`.
 // Extend this list to add more cards to the grid instantly.
@@ -126,11 +124,11 @@ const List<MenuItem> kMenuItems = [
   ),
 ];
 
-// ── CartModel ─────────────────────────────────────────────────────────────────
+// ── CartModel 
 
-/// Holds the current cart state and exposes mutation methods.
-/// Extend with ChangeNotifier and call notifyListeners() after every mutation
-/// so the UI rebuilds automatically.
+/* Holds the current cart state and exposes mutation methods.
+Extend with ChangeNotifier and call notifyListeners() after every mutation, So the UI rebuilds automatically.*/
+
 class CartModel extends ChangeNotifier {
   // item.id → quantity in cart
   final Map<String, int> _quantities = {};
@@ -138,7 +136,6 @@ class CartModel extends ChangeNotifier {
   // Raw JSON log entries shown in the "Activity Log" drawer
   final List<Map<String, dynamic>> _activityLog = [];
 
-  // ── Getters ──────────────────────────────────────────────────────────────
 
   int quantityOf(String itemId) => _quantities[itemId] ?? 0;
 
@@ -160,7 +157,6 @@ class CartModel extends ChangeNotifier {
     return total;
   }
 
-  // ── Mutations ─────────────────────────────────────────────────────────────
 
   /// Increments the quantity for a given item by [delta] (can be negative).
   void adjustQuantity(String itemId, int delta) {

@@ -7,10 +7,7 @@ import 'package:flutter_sound/flutter_sound.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'cart_model.dart';
 
-// ── Change this to your laptop's WiFi IP address ─────────────────────────────
-// Run `ipconfig` in terminal, find IPv4 under your WiFi adapter
-// Example: 'http://192.168.1.5:8000'
-const String kBackendBaseUrl = 'http://192.168.1.2:8000';
+const String kBackendBaseUrl = 'http://192.168.1.2:8000'; // Depends on User-User Network My Own IPV4 Address
 
 enum RecordingState { idle, recording, processing, success, error }
 

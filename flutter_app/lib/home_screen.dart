@@ -1,18 +1,3 @@
-// ============================================================================
-//  home_screen.dart
-//
-//  The single-screen UI:
-//    ┌───────────────────────────────┐
-//    │  AppBar (logo + cart badge)   │
-//    │  ───────────────────────────  │
-//    │  Menu Item Grid (scrollable)  │
-//    │  ···  food cards  ···         │
-//    │                               │
-//    │     [🎙 FAB + pulse ring]     │
-//    └───────────────────────────────┘
-//    Drawer: Activity Log (raw JSON)
-// ============================================================================
-
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -72,21 +57,20 @@ class _HomeScreenState extends State<HomeScreen>
     super.dispose();
   }
 
-  // ── Build ──────────────────────────────────────────────────────────────────
-
+  // Build
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: const Color(0xFF121212),
 
-      // ── AppBar ──────────────────────────────────────────────────────────
+      // AppBar
       appBar: _buildAppBar(),
 
-      // ── Drawer: Activity Log ─────────────────────────────────────────────
+      // Drawer
       endDrawer: _buildActivityLogDrawer(),
 
-      // ── Body ─────────────────────────────────────────────────────────────
+// Main Body
       body: Column(
         children: [
           // Status Banner (shows transcript / errors / processing state)
@@ -212,7 +196,10 @@ class _HomeScreenState extends State<HomeScreen>
                         ? [const Color(0xFFFF1744), const Color(0xFFFF6D3F)]
                         : isProcessing
                             ? [const Color(0xFF555555), const Color(0xFF333333)]
-                            : [const Color(0xFFFF6D3F), const Color(0xFFFFBE0B)],
+                            : [
+                                const Color(0xFFFF6D3F),
+                                const Color(0xFFFFBE0B)
+                              ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -320,7 +307,7 @@ class _HomeScreenState extends State<HomeScreen>
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-//  Sub-widgets (kept in same file for brevity; split into widgets/ in prod)
+//  Sub-widgets 
 // ─────────────────────────────────────────────────────────────────────────────
 
 // ── Voice Status Banner ──────────────────────────────────────────────────────
@@ -459,8 +446,8 @@ class _MenuCard extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(16)),
+                    borderRadius:
+                        const BorderRadius.vertical(top: Radius.circular(16)),
                     gradient: LinearGradient(
                       colors: [
                         item.accentColor.withOpacity(0.15),
@@ -471,8 +458,8 @@ class _MenuCard extends StatelessWidget {
                     ),
                   ),
                   child: Center(
-                    child: Text(item.emoji,
-                        style: const TextStyle(fontSize: 52)),
+                    child:
+                        Text(item.emoji, style: const TextStyle(fontSize: 52)),
                   ),
                 ),
                 // Quantity badge (top-right)
@@ -569,9 +556,7 @@ class _StepperButton extends StatelessWidget {
         height: 26,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: onTap != null
-              ? color.withOpacity(0.15)
-              : Colors.transparent,
+          color: onTap != null ? color.withOpacity(0.15) : Colors.transparent,
           border: Border.all(
             color: onTap != null ? color : Colors.white10,
             width: 1,
@@ -703,8 +688,9 @@ class _LogEntryState extends State<_LogEntry> {
   Widget build(BuildContext context) {
     final bool isSuccess = widget.entry['response']?['success'] == true;
     final bool isError = widget.entry['error'] != null;
-    final Color statusColor =
-        isError ? const Color(0xFFFFAB40) : (isSuccess ? const Color(0xFF69F0AE) : const Color(0xFFFF5252));
+    final Color statusColor = isError
+        ? const Color(0xFFFFAB40)
+        : (isSuccess ? const Color(0xFF69F0AE) : const Color(0xFFFF5252));
     final String statusLabel =
         isError ? 'LOCAL ERROR' : (isSuccess ? 'SUCCESS' : 'API ERROR');
 
@@ -717,8 +703,7 @@ class _LogEntryState extends State<_LogEntry> {
           Row(
             children: [
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
                   color: statusColor.withOpacity(0.15),
                   borderRadius: BorderRadius.circular(4),
@@ -775,12 +760,10 @@ class _LogEntryState extends State<_LogEntry> {
               decoration: BoxDecoration(
                 color: const Color(0xFF0A0A0A),
                 borderRadius: BorderRadius.circular(8),
-                border:
-                    Border.all(color: const Color(0xFF1E1E1E), width: 1),
+                border: Border.all(color: const Color(0xFF1E1E1E), width: 1),
               ),
               child: SelectableText(
-                const JsonEncoder.withIndent('  ')
-                    .convert(widget.entry),
+                const JsonEncoder.withIndent('  ').convert(widget.entry),
                 style: GoogleFonts.sourceCodePro(
                   color: const Color(0xFF66BB6A),
                   fontSize: 9.5,

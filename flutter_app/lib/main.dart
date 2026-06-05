@@ -1,8 +1,3 @@
-// ============================================================================
-//  main.dart — App entry point
-//  Sets up the app theme and mounts the root widget.
-// ============================================================================
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'home_screen.dart';
@@ -21,7 +16,6 @@ class IndicVoiceFoodApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       // ── Global Theme ──────────────────────────────────────────────────────
-      // Deep food-delivery orange/red palette with dark backgrounds.
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
@@ -35,7 +29,6 @@ class IndicVoiceFoodApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: const Color(0xFF121212),
 
-        // Poppins — clean, modern, reads well in English & Devanagari
         textTheme: GoogleFonts.poppinsTextTheme(
           ThemeData.dark().textTheme,
         ),
