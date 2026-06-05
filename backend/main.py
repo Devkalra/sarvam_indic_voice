@@ -1,15 +1,3 @@
-"""
-=============================================================================
-  Sarvam AI — Indic Voice-to-UI  |  FastAPI Backend  |  main.py
-=============================================================================
-  ARCHITECTURE
-  ────────────
-  Flutter App  ──POST /process-voice──▶  FastAPI  ──▶  Sarvam STT API
-                                                  ◀──  JSON transcript
-                         Flutter Cart ◀── Structured JSON ◀── Keyword Parser
-=============================================================================
-"""
-
 import os
 import re
 import json
@@ -31,8 +19,7 @@ app = FastAPI(
 )
 
 # ─── CORS — allow Flutter (mobile / web) and local dev ────────────────────────
-# Flutter web runs on localhost:* ; Flutter mobile calls your machine's IP.
-# For production lock this down to your specific domain/IP.
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],          # ⚠️ Tighten in production
@@ -44,8 +31,7 @@ app.add_middleware(
 # ─── Config / Secrets (use env-vars; never hardcode in production) ─────────────
 SARVAM_API_KEY: str = os.getenv("SARVAM_API_KEY", "YOUR_API_SUBSCRIPTION_KEY_HERE")
 
-# Sarvam AI Speech-to-Text endpoint
-# Docs: https://docs.sarvam.ai/api-reference-docs/speech-to-text/transcribe
+
 SARVAM_STT_URL: str = "https://api.sarvam.ai/speech-to-text"
 
 # ─── Menu Catalogue ───────────────────────────────────────────────────────────
